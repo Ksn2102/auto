@@ -41,66 +41,7 @@
         </div>
       </section>
       
-      <!-- Дополнительная информация -->
-      <section class="additional-info">
-        <div class="info-card">
-          <h3>Что включено во все тарифы?</h3>
-          <div class="included-list">
-            <div class="included-item">
-              <span class="icon">🛡️</span>
-              <div>
-                <h4>Страховка</h4>
-                <p>Полная страховка от ущерба и угона</p>
-              </div>
-            </div>
-            <div class="included-item">
-              <span class="icon">⛽</span>
-              <div>
-                <h4>Топливо</h4>
-                <p>Полный бак при получении автомобиля</p>
-              </div>
-            </div>
-            <div class="included-item">
-              <span class="icon">📞</span>
-              <div>
-                <h4>Круглосуточная поддержка</h4>
-                <p>Техническая помощь 24/7</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="info-card faq">
-          <h3>Частые вопросы</h3>
-          <div class="faq-item">
-            <div class="faq-question" @click="toggleFaq(0)">
-              <span>Можно ли изменить тариф после бронирования?</span>
-              <span class="faq-icon">{{ activeFaq === 0 ? '−' : '+' }}</span>
-            </div>
-            <div class="faq-answer" v-if="activeFaq === 0">
-              <p>Да, вы можете изменить тариф за 24 часа до начала аренды без дополнительных комиссий.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" @click="toggleFaq(1)">
-              <span>Есть ли ограничения по пробегу?</span>
-              <span class="faq-icon">{{ activeFaq === 1 ? '−' : '+' }}</span>
-            </div>
-            <div class="faq-answer" v-if="activeFaq === 1">
-              <p>В тарифе "Эконом" есть ограничение 200 км в сутки. В остальных тарифах пробег не ограничен.</p>
-            </div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" @click="toggleFaq(2)">
-              <span>Нужен ли залог?</span>
-              <span class="faq-icon">{{ activeFaq === 2 ? '−' : '+' }}</span>
-            </div>
-            <div class="faq-answer" v-if="activeFaq === 2">
-              <p>Да, залог составляет 10 000 ₽. Возвращается в течение 3 дней после завершения аренды.</p>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       
       <!-- Калькулятор стоимости -->
       <section class="calculator-section">
@@ -193,21 +134,7 @@ export default {
             'Приоритетная поддержка'
           ]
         },
-        {
-          id: 4,
-          name: 'Бизнес',
-          price: '3 500 ₽',
-          period: '/сутки',
-          image: require('@/assets/4.png'),
-          features: [
-            'Безлимитный пробег',
-            'Бизнес-класс автомобилей',
-            'Полная страховка',
-            'Дополнительный водитель',
-            'Wi-Fi в автомобиле',
-            'Помощь с багажом'
-          ]
-        }
+    
       ],
       activeFaq: null,
       calcTarif: 2, // Стандарт по умолчанию

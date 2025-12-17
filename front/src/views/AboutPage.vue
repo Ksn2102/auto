@@ -2,7 +2,7 @@
   <div class="dis">
     <img class="logotip" src="@/assets/logo.svg" alt="">
     <div>
-      <h1 style="padding-bottom: 20px;">CarPoint - ваш пункт назначения в мире авто. Где каждый автомобиль - точка
+      <h1 style="padding-bottom: 20px;">PrestigeRide - ваш пункт назначения в мире авто. Где каждый автомобиль - точка
         комфорта</h1>
       <p style="font-weight: bolder;">Из названия компании и подчеркиваем:</p>
       <ul>

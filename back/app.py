@@ -129,33 +129,33 @@ def verify_token():
     auth_header = request.headers.get('Authorization', '')
     
     if not auth_header:
-        print("⚠️  Нет заголовка Authorization")
+        print("  Нет заголовка Authorization")
         return None
     
     if not auth_header.startswith('Bearer '):
-        print(f"⚠️  Заголовок не начинается с 'Bearer ': {auth_header[:50]}...")
+        print(f" Заголовок не начинается с 'Bearer ': {auth_header[:50]}...")
         return None
     
     token = auth_header.replace('Bearer ', '').strip()
     
     if not token:
-        print("⚠️  Пустой токен после 'Bearer '")
+        print("  Пустой токен после 'Bearer '")
         return None
     
-    print(f"🔐 Проверка токена: {token[:30]}...")
+    print(f" Проверка токена: {token[:30]}...")
     
     try:
         payload = jwt.decode(token, "car-rental-secret-key", algorithms=["HS256"])
-        print(f"✅ Токен валиден! user_id: {payload.get('user_id')}")
+        print(f" Токен валиден! user_id: {payload.get('user_id')}")
         return payload
     except jwt.ExpiredSignatureError:
-        print("❌ Токен истек")
+        print(" Токен истек")
         return None
     except jwt.InvalidTokenError as e:
-        print(f"❌ Невалидный токен: {str(e)}")
+        print(f" Невалидный токен: {str(e)}")
         return None
     except Exception as e:
-        print(f"❌ Ошибка при проверке токена: {str(e)}")
+        print(f" Ошибка при проверке токена: {str(e)}")
         return None
 
 # ========== АУТЕНТИФИКАЦИЯ ==========
@@ -165,7 +165,7 @@ def register():
     """Регистрация нового пользователя"""
     try:
         data = request.json
-        print(f"📝 Регистрация: {data.get('email')}")
+        print(f" Регистрация: {data.get('email')}")
         
         # Валидация
         if not data.get('email') or '@' not in data.get('email', ''):
@@ -206,7 +206,7 @@ def register():
             algorithm="HS256"
         )
         
-        print(f"✅ Пользователь зарегистрирован: {user['email']} (ID: {user['id']})")
+        print(f" Пользователь зарегистрирован: {user['email']} (ID: {user['id']})")
         
         return jsonify({
             "success": True,
@@ -222,7 +222,7 @@ def register():
         }), 201
         
     except Exception as e:
-        print(f"❌ Ошибка регистрации: {str(e)}")
+        print(f" Ошибка регистрации: {str(e)}")
         return jsonify({"error": "Ошибка сервера"}), 500
 
 @app.route('/api/login', methods=['POST'])
@@ -230,12 +230,12 @@ def login():
     """Вход пользователя"""
     try:
         data = request.json
-        print(f"🔑 Вход: {data.get('email')}")
+        print(f" Вход: {data.get('email')}")
         
         user = next((u for u in users_db if u['email'] == data.get('email')), None)
         
         if not user:
-            print(f"❌ Пользователь не найден: {data.get('email')}")
+            print(f" Пользователь не найден: {data.get('email')}")
             return jsonify({"error": "Неверный email или пароль"}), 401
         
         # Проверка пароля
@@ -243,7 +243,7 @@ def login():
             data['password'].encode('utf-8'),
             user['password_hash'].encode('utf-8')
         ):
-            print(f"❌ Неверный пароль для: {data.get('email')}")
+            print(f" Неверный пароль для: {data.get('email')}")
             return jsonify({"error": "Неверный email или пароль"}), 401
         
         # Создание токена
@@ -257,7 +257,7 @@ def login():
             algorithm="HS256"
         )
         
-        print(f"✅ Вход выполнен: {user['email']} (ID: {user['id']})")
+        print(f" Вход выполнен: {user['email']} (ID: {user['id']})")
         
         return jsonify({
             "success": True,
@@ -273,13 +273,13 @@ def login():
         })
         
     except Exception as e:
-        print(f"❌ Ошибка входа: {str(e)}")
+        print(f" Ошибка входа: {str(e)}")
         return jsonify({"error": "Ошибка сервера"}), 500
 
 @app.route('/api/user/profile', methods=['GET'])
 def get_profile():
     """Получить профиль текущего пользователя"""
-    print("👤 Запрос профиля пользователя")
+    print(" Запрос профиля пользователя")
     
     payload = verify_token()
     if not payload:
@@ -289,10 +289,10 @@ def get_profile():
     user = next((u for u in users_db if u['id'] == user_id), None)
     
     if not user:
-        print(f"❌ Пользователь с ID {user_id} не найден в базе")
+        print(f" Пользователь с ID {user_id} не найден в базе")
         return jsonify({"error": "Пользователь не найден"}), 404
     
-    print(f"✅ Профиль отправлен для: {user['email']}")
+    print(f" Профиль отправлен для: {user['email']}")
     
     return jsonify({
         "success": True,
@@ -311,19 +311,19 @@ def get_profile():
 @app.route('/api/cars', methods=['GET'])
 def get_cars():
     """Получить список всех машин"""
-    print("🚗 Запрос списка машин")
+    print(" Запрос списка машин")
     return jsonify(CARS)
 
 @app.route('/api/cars/<int:car_id>', methods=['GET'])
 def get_car(car_id):
     """Получить информацию о конкретной машине"""
-    print(f"🚗 Запрос машины ID: {car_id}")
+    print(f" Запрос машины ID: {car_id}")
     
     car = next((c for c in CARS if c['id'] == car_id), None)
     if car:
         return jsonify(car)
     
-    print(f"❌ Машина с ID {car_id} не найдена")
+    print(f" Машина с ID {car_id} не найдена")
     return jsonify({"error": "Машина не найдена"}), 404
 
 # ========== БРОНИРОВАНИЯ ==========
@@ -333,24 +333,24 @@ def create_bron():
     """Создание бронирования (ТОЛЬКО для авторизованных пользователей)"""
     try:
         data = request.json
-        print(f"📋 Создание брони: Машина {data.get('carId')}")
+        print(f" Создание брони: Машина {data.get('carId')}")
         
-        # ✅ ТРЕБУЕМ авторизацию
+        #  ТРЕБУЕМ авторизацию
         payload = verify_token()
         if not payload:
-            print("❌ Попытка бронирования без авторизации")
+            print(" Попытка бронирования без авторизации")
             return jsonify({
                 "success": False,
                 "error": "Для бронирования необходимо войти в систему"
             }), 401
         
         user_id = payload['user_id']
-        print(f"✅ Пользователь авторизован: user_id={user_id}")
+        print(f" Пользователь авторизован: user_id={user_id}")
         
         global booking_counter
         booking = {
             "id": booking_counter,
-            "user_id": user_id,  # ✅ Теперь всегда есть user_id
+            "user_id": user_id,  
             "car_id": data.get('carId'),
             "car_name": data.get('carName', f"Машина {data.get('carId')}"),
             "customer_name": data.get('name', 'Не указано'),
@@ -366,32 +366,32 @@ def create_bron():
         bookings_db.append(booking)
         booking_counter += 1
         
-        print(f"✅ Бронь создана! ID: {booking['id']}, Пользователь: {user_id}")
+        print(f" Бронь создана! ID: {booking['id']}, Пользователь: {user_id}")
         
         return jsonify({
             "success": True,
-            "message": "✅ Бронирование успешно создано!",
+            "message": " Бронирование успешно создано!",
             "booking": booking
         })
         
     except Exception as e:
-        print(f"❌ Ошибка при создании брони: {str(e)}")
+        print(f" Ошибка при создании брони: {str(e)}")
         return jsonify({"error": "Ошибка при создании брони"}), 500
 
 @app.route('/api/bookings', methods=['GET'])
 def get_bookings():
     """Получить все брони текущего пользователя"""
-    print("📋 Запрос списка броней")
+    print(" Запрос списка броней")
     
     payload = verify_token()
     if not payload:
-        print("❌ Нет авторизации для просмотра броней")
+        print(" Нет авторизации для просмотра броней")
         return jsonify({"error": "Необходима авторизация"}), 401
     
     user_id = payload['user_id']
     user_bookings = [b for b in bookings_db if b['user_id'] == user_id]
     
-    print(f"✅ Найдено броней: {len(user_bookings)} для user_id={user_id}")
+    print(f" Найдено броней: {len(user_bookings)} для user_id={user_id}")
     
     return jsonify({
         "success": True,
@@ -404,7 +404,7 @@ def get_bookings():
 @app.route('/api/tarifs', methods=['GET'])
 def get_tarifs():
     """Получить список тарифов"""
-    print("💰 Запрос тарифов")
+    print(" Запрос тарифов")
     return jsonify([
         {
             "id": 1, 
@@ -434,7 +434,7 @@ def get_tarifs():
 @app.route('/api/debug/users', methods=['GET'])
 def debug_users():
     """Отладка: посмотреть всех пользователей"""
-    print("🔧 Отладочный запрос: все пользователи")
+    print(" Отладочный запрос: все пользователи")
     users_safe = []
     for user in users_db:
         users_safe.append({
@@ -456,20 +456,20 @@ def debug_users():
 @app.route('/api/test-auth', methods=['GET'])
 def test_auth():
     """Тестирование авторизации"""
-    print("🧪 Тест авторизации")
+    print(" Тест авторизации")
     
     payload = verify_token()
     if payload:
         return jsonify({
             "success": True,
-            "message": "✅ Авторизация работает!",
+            "message": " Авторизация работает!",
             "user_id": payload.get('user_id'),
             "email": payload.get('email')
         })
     else:
         return jsonify({
             "success": False,
-            "message": "❌ Нет валидной авторизации"
+            "message": " Нет валидной авторизации"
         }), 401
 
 # ========== ГЛАВНАЯ СТРАНИЦА ==========
@@ -478,8 +478,8 @@ def test_auth():
 def home():
     """Главная страница API"""
     return jsonify({
-        "project": "🚗 Car Rental API",
-        "status": "✅ Работает!",
+        "project": " Car Rental API",
+        "status": " Работает!",
         "version": "1.0.0",
         "users_count": len(users_db),
         "bookings_count": len(bookings_db),
@@ -517,15 +517,15 @@ def get_my_bookings_simple():
 
 if __name__ == '__main__':
     print("=" * 60)
-    print("🚗 CAR RENTAL API ЗАПУЩЕН!")
-    print("📍 Адрес: http://localhost:5000")
-    print("🔗 Фронтенд: http://localhost:8080")
+    print(" CAR RENTAL API ЗАПУЩЕН!")
+    print(" Адрес: http://localhost:5000")
+    print(" Фронтенд: http://localhost:8080")
     print("-" * 60)
-    print(f"👥 Тестовый пользователь: test@example.com / test123")
-    print(f"📊 Пользователей в базе: {len(users_db)}")
-    print(f"📋 Броней в базе: {len(bookings_db)}")
-    print(f"🚗 Машин в каталоге: {len(CARS)}")
+    print(f" Тестовый пользователь: test@example.com / test123")
+    print(f" Пользователей в базе: {len(users_db)}")
+    print(f" Броней в базе: {len(bookings_db)}")
+    print(f" Машин в каталоге: {len(CARS)}")
     print("=" * 60)
-    print("📝 Логи запросов будут отображаться ниже:")
+    print(" Логи запросов будут отображаться ниже:")
     print("=" * 60)
     app.run(debug=True, port=5000)

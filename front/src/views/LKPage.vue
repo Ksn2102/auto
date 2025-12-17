@@ -1,23 +1,11 @@
 <template>
   <div class="lk-simple">
-    <h1>📋 МОИ БРОНИРОВАНИЯ</h1>
-    
-    <div class="controls">
-      <button @click="loadAllBookings">Показать ВСЕ брони в системе</button>
-      <button @click="loadMyBookings">Показать МОИ брони</button>
-      <button @click="createTestBooking">Создать тестовую бронь</button>
-    </div>
-    
-    <div class="debug-info">
-      <h3>📊 Отладочная информация:</h3>
-      <p>Токен в localStorage: {{ token ? '✅ Есть' : '❌ Нет' }}</p>
-      <p>Мой user_id: {{ myUserId || 'Не определен' }}</p>
-      <p>Всего броней в системе: {{ allBookings.length }}</p>
-      <p>Мои брони: {{ myBookings.length }}</p>
-    </div>
+    <h1> МОИ БРОНИРОВАНИЯ</h1>
+
+
     
     <div v-if="allBookings.length > 0" class="all-bookings">
-      <h3>🔄 ВСЕ брони в системе:</h3>
+      <h3> ВСЕ брони в системе:</h3>
       <div v-for="booking in allBookings" :key="booking.id" 
            :class="['booking-card', booking.user_id == myUserId ? 'my-booking' : 'other-booking']">
         <h4>{{ booking.car_name }} (ID: {{ booking.id }})</h4>
@@ -25,27 +13,26 @@
         <p><strong>Клиент:</strong> {{ booking.customer_name }}</p>
         <p><strong>Дата:</strong> {{ booking.date }} {{ booking.time }}</p>
         <p><strong>Статус:</strong> {{ booking.status }}</p>
-        <p v-if="booking.user_id == myUserId" class="my-label">👆 ЭТО МОЯ БРОНЬ!</p>
+        <p v-if="booking.user_id == myUserId" class="my-label"> ЭТО МОЯ БРОНЬ!</p>
       </div>
     </div>
     
     <div v-if="myBookings.length > 0" class="my-bookings">
-      <h3>✅ МОИ брони (user_id = {{ myUserId }}):</h3>
+      <h3> МОИ брони (user_id = {{ myUserId }}):</h3>
       <div v-for="booking in myBookings" :key="booking.id" class="my-booking-card">
-        <h4>🚗 {{ booking.car_name }}</h4>
-        <p>📅 {{ booking.date }} в {{ booking.time }}</p>
-        <p>📞 {{ booking.phone }}</p>
-        <p>📝 {{ booking.comment || 'Без комментария' }}</p>
-        <p>🆔 ID брони: {{ booking.id }}</p>
+        <h4> {{ booking.car_name }}</h4>
+        <p> {{ booking.date }} в {{ booking.time }}</p>
+        <p> {{ booking.phone }}</p>
+        <p> {{ booking.comment || 'Без комментария' }}</p>
+        <p> ID брони: {{ booking.id }}</p>
       </div>
     </div>
     
     <div v-else class="no-bookings">
-      <h3>😔 У вас нет бронирований</h3>
+      <h3> У вас нет бронирований</h3>
       <p>Попробуйте:</p>
       <ol>
         <li>Залогиньтесь</li>
-        <li>Нажмите "Создать тестовую бронь" выше</li>
         <li>Обновите страницу</li>
       </ol>
     </div>
@@ -154,14 +141,14 @@ export default {
         const result = await response.json();
         
         if (response.ok) {
-          alert(`✅ Тестовая бронь создана! ID: ${result.booking.id}`);
+          alert(` Тестовая бронь создана! ID: ${result.booking.id}`);
           await this.loadData(); // Обновляем данные
         } else {
-          alert(`❌ Ошибка: ${result.error}`);
+          alert(` Ошибка: ${result.error}`);
         }
       } catch (error) {
         console.error('Ошибка создания брони:', error);
-        alert('❌ Ошибка создания брони');
+        alert(' Ошибка создания брони');
       }
     }
   }

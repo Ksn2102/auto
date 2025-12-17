@@ -46,11 +46,6 @@ const routes = [
     name: 'Lk',
     component: LKPage,
   },
-  // {
-  // path: '/lk-simple',
-  // name: 'LKSimple',
-  // component: () => import('../views/LKSimple.vue')
-  // },
   {
     path: '/katalog',
     name: 'Katalog',
