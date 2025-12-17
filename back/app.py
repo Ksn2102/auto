@@ -513,6 +513,7 @@ def get_my_bookings_simple():
     # Для тестирования возвращаем все брони
     return jsonify(bookings_db)
 
+
 # ========== ЗАПУСК СЕРВЕРА ==========
 
 if __name__ == '__main__':

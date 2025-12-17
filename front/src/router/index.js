@@ -9,10 +9,8 @@ import TarifPage from '../views/TarifPage.vue';
 import BronPage from '../views/BronPage.vue'; 
 import IndividPage from '../views/IndividPage.vue'; 
 import RecoveryPage from '../views/RecoveryPage.vue';
-// import AdminPage from '@/views/AdminPage.vue';
-import AdminCars from '../views/AdminCars.vue';
-import AdminkatPage from '../views/AdminkatPage.vue';
-import AdminkategPage from '../views/AdminkategPage.vue';
+//import AdminPanel from '../views/AdminPanel.vue';
+
 
 
 const routes = [
@@ -62,7 +60,7 @@ const routes = [
     component: BronPage,
   },
   {
-    path: '/bron/:id', // новый маршрут для бронирования
+    path: '/bron/:id', 
     component: BronPage,
     name: 'BronPage'
   },
@@ -76,18 +74,17 @@ const routes = [
     name: 'Recovery',
     component: RecoveryPage,
   },
-  {
-    path: '/admin/cars',
-    component: AdminCars
-  },
-  {
-    path: '/adminkat',
-    component: AdminkatPage,
-  },
-  {
-    path: '/adminkateg',
-    component: AdminkategPage,
-  }
+{
+  path: '/admin',
+  name: 'AdminPanel',
+  component: () => import('../views/AdminPanel.vue'),
+  meta: { requiresAuth: true }
+},
+{
+  path: '/admin-login',
+  name: 'AdminLogin',
+  component: () => import('../views/AdminLogin.vue')
+}
 ];
 
 const router = createRouter({
