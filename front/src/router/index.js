@@ -1,14 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import Home from '../views/HomePage.vue'; // Страница "Главная"
-import About from '../views/AboutPage.vue'; // Страница "О нас"
-import RegisterPage from '../views/RegisterPage.vue'; // Импортируем новую страницу
+import Home from '../views/HomePage.vue'; 
+import About from '../views/AboutPage.vue'; 
+import RegisterPage from '../views/RegisterPage.vue'; 
 import LoginPage from '../views/LoginPage.vue'; 
-import WherePage from '../views/WherePage.vue'; 
+import LKPage from '../views/LKPage.vue'; 
 import KatalogPage from '../views/KatalogPage.vue'; 
-import PokypkaPage from '../views/PokypkaPage.vue'; 
-import KorzinaPage from '../views/KorzinaPage.vue'; 
+import TarifPage from '../views/TarifPage.vue'; 
+import BronPage from '../views/BronPage.vue'; 
 import IndividPage from '../views/IndividPage.vue'; 
-import RecoveryPage from '../views/RecoveryPage.vue'; 
+import RecoveryPage from '../views/RecoveryPage.vue';
+// import AdminPage from '@/views/AdminPage.vue';
+import AdminCars from '../views/AdminCars.vue';
+import AdminkatPage from '../views/AdminkatPage.vue';
+import AdminkategPage from '../views/AdminkategPage.vue';
+
 
 const routes = [
   {
@@ -37,24 +42,34 @@ const routes = [
     component: LoginPage, 
   },
   {
-    path: '/where',
-    name: 'Where',
-    component: WherePage,
+    path: '/lk',
+    name: 'Lk',
+    component: LKPage,
   },
+  // {
+  // path: '/lk-simple',
+  // name: 'LKSimple',
+  // component: () => import('../views/LKSimple.vue')
+  // },
   {
     path: '/katalog',
     name: 'Katalog',
     component: KatalogPage,
   },
   {
-    path: '/pokypka',
-    name: 'Pokypka',
-    component: PokypkaPage,
+    path: '/tarif',
+    name: 'Tarif',
+    component: TarifPage,
   },
   {
-    path: '/korzina',
-    name: 'Korzina',
-    component: KorzinaPage,
+    path: '/bron',
+    name: 'Bron',
+    component: BronPage,
+  },
+  {
+    path: '/bron/:id', // новый маршрут для бронирования
+    component: BronPage,
+    name: 'BronPage'
   },
   {
     path: '/katalog/:id',
@@ -66,6 +81,18 @@ const routes = [
     name: 'Recovery',
     component: RecoveryPage,
   },
+  {
+    path: '/admin/cars',
+    component: AdminCars
+  },
+  {
+    path: '/adminkat',
+    component: AdminkatPage,
+  },
+  {
+    path: '/adminkateg',
+    component: AdminkategPage,
+  }
 ];
 
 const router = createRouter({

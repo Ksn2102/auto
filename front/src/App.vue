@@ -1,22 +1,18 @@
 <template>
   <div id="app">
+    <div class="ph"></div>
     <nav class="left">
-      <!-- <router-link to="/"></router-link> | --><img class="logo" src="@/assets/logo.svg" alt="">
-      <router-link to="/">Главная</router-link>
-      <router-link to="/about">О нас</router-link>
-      <router-link to="/korzina">Корзина</router-link>
+      <router-link to="/"><img class="logotyp" src="@/assets/logo.svg" alt=""></router-link>
+      <div class="fl">
+      
       <router-link to="/katalog">Каталог</router-link>
-      <router-link to="/pokypka">Покупка онлайн</router-link>
-      <router-link to="/where">Где найти?</router-link>
+      <router-link to="/tarif">Тарифы</router-link>
       <router-link to="/register" class="right">Регистрация</router-link>
+      <router-link to="/lk">Личный кабинет</router-link>
+      <router-link to="/about">О нас</router-link>
+    </div>
     </nav>
-    <router-view>
-    </router-view>
-    <!-- <div class="photo">
-            <img class="sss" src="../photo/backk.png" alt="">
-             <span class="text">Выберите автомобиль мечты!</span>
-             <button class="text1">Подробнее</button>
-        </div> -->
+    <router-view></router-view>
     <footer>
       <div class="cont">
         <div>
@@ -66,7 +62,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: 'App',
@@ -74,15 +69,16 @@ export default {
 </script>
 
 <style>
+/* Базовые стили */
 @import '@/styles/style.css';
 
 .text {
   position: absolute;
   top: 40%;
-  left: 40%;
+  left: 50%;
   transform: translate(-50%, -50%);
   color: white;
-  font-size: 54px;
+  font-size: 2rem; /* Используем rem для масштабируемости */
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
@@ -90,8 +86,11 @@ export default {
   text-align: left;
 }
 
-nav {
-  padding: 20px;
+.left  {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 80px;
   background-color: #000000;
 }
 
@@ -99,6 +98,7 @@ nav a {
   margin-right: 10px;
   text-decoration: none;
   color: #ffffff;
+  font-size: 1rem;
 }
 
 nav a.router-link-active {
@@ -106,25 +106,77 @@ nav a.router-link-active {
   color: #4842b9;
 }
 
+.logotyp {
+  height: 90px; /* Фиксированная высота логотипа */
+}
+
 footer {
   background-color: #eeeeee;
+  padding: 20px 0;
 }
 
 .cont {
   display: flex;
+  flex-wrap: wrap; /* Добавляем возможность переноса элементов */
   margin: 0 auto;
-  width: 100%;
+  width: 90%; /* Уменьшаем ширину для лучшей адаптивности */
   max-width: 1100px;
   justify-content: space-around;
-  padding-top: 10px;
 }
 
-.zag{
+.zag {
   font-weight: bold;
   padding-bottom: 10px;
+  font-size: 1.2rem;
 }
 
-.etc{
+.etc {
   padding-bottom: 5px;
+  font-size: 0.9rem;
+}
+
+/* Адаптивность для мобильных устройств */
+@media (max-width: 768px) {
+  nav {
+    flex-direction: column; /* Меняем направление навигации на вертикальное */
+    align-items: flex-start;
+  }
+
+  nav a {
+    margin: 5px 0; /* Увеличиваем отступ между ссылками */
+  }
+
+  .logo {
+    margin-bottom: 10px; /* Отступ под логотип */
+  }
+
+  .cont {
+    flex-direction: column; /* Переводим колонки в футере в столбец */
+    align-items: center;
+  }
+
+  .cont div {
+    width: 100%; /* Ширина каждого блока в футере становится 100% */
+    text-align: center;
+  }
+}
+
+/* Адаптивность для маленьких экранов */
+@media (max-width: 480px) {
+  .text {
+    font-size: 1.5rem; /* Уменьшаем размер текста */
+  }
+
+  nav a {
+    font-size: 0.9rem; /* Уменьшаем размер шрифта в навигации */
+  }
+
+  .zag {
+    font-size: 1rem; /* Уменьшаем размер заголовков в футере */
+  }
+
+  .etc {
+    font-size: 0.8rem; /* Уменьшаем размер обычного текста в футере */
+  }
 }
 </style>

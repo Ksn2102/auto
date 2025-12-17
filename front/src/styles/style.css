@@ -92,3 +92,8 @@ a {
     padding: 5px 30px;
     margin-top: 25px;
 }
+
+.fl{
+    display: flex;
+    gap: 20px;
+}

@@ -4,12 +4,12 @@
             <div class="first">
                 <div>
                     <h1 class="filtrs1">Цена</h1>
-                    <div>
-                        <div class="centerrr">
+                    <div class="mini">
+                        <div class="centerrr9">
                             <label for="username">От</label>
                             <input type="text" class="ramka">
                         </div>
-                        <div class="centerrr">
+                        <div class="centerrr9">
                             <label for="username">До</label>
                             <input type="text" class="ramka">
                         </div>
@@ -24,15 +24,15 @@
                         </select>
                     </div>
                     <div class="filtrs2">
-                        <div class="center">
+                        <div class="center9">
                             <input type="checkbox">
-                            <label for="username">Год производства</label>
+                            <label for="username">Год</label>
                         </div>
-                        <div class="center">
+                        <div class="center9">
                             <input type="checkbox">
                             <label for="username">Наименование</label>
                         </div>
-                        <div class="center">
+                        <div class="center9">
                             <input type="checkbox">
                             <label for="username">Цена</label>
                         </div>
@@ -50,7 +50,7 @@
                         :key="car.id"
                      >
                         <p class="photo">
-                            <img class="razmer1"
+                            <img class="razmer12"
                             :src="require(`@/assets/${car.img}`)"
                             />
                         </p>
@@ -77,8 +77,19 @@ export default {
 };
 </script>
 <style>
+
+label{
+text-align: center;
+}   
+
+.mini{
+    display: flex;
+    gap: 20px;
+}
+
 .second{
     padding-bottom: 20px;
+    margin-left: 100px;
 }
 
 .flex {
@@ -163,16 +174,6 @@ a{
     justify-content: space-evenly;
 }
 
-.razmer{
-    width: 200px;
-    height: 150px;
-}
-
-.razmer1{
-    width: 200px;
-    height: 250px;
-}
-
 .opic{
     text-align: center;
 }
@@ -223,21 +224,10 @@ a{
     margin-top: 20px;
 }
 
-.razmer1{
-    width: 330px;
+.razmer12{
+    width: 270px;
     height: 250px;
 }
-
-/* .razmer2{
-    width: 290px;
-    height: 250px;
-}
-
-.razmer3{
-    width: 200px;
-    height: 150px;
-    margin-left: 45px;
-} */
 
 .conteiner15 {
     max-width: 1300px;
@@ -249,7 +239,7 @@ a{
 }
 
 .ramka{
-    width: 100px;
+    width: 50px;
     border-radius: 20px;
     border: 1px solid #255aba;
 }
@@ -259,11 +249,11 @@ a{
     border: 1px solid #255aba;
 }
 
-.center{
+.center9{
     display: flex;
 }
 
-.centerrr{
+.centerrr9x{
     display: flex;
     padding: 10px;
 }
@@ -286,5 +276,73 @@ a{
     text-align: center;
     padding: 5px 30px;
     margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .conteiner15 {
+        flex-direction: column; /* Переводим layout в вертикальную ориентацию */
+        display: block;
+    }
+
+    .first {
+        max-width: 100%; /* Блок фильтров занимает всю ширину */
+        margin-bottom: 20px;
+    }
+
+    .second {
+        max-width: 100%; /* Блок товаров занимает всю ширину */
+    }
+
+    .centerrr9x{
+        justify-content: center;
+    }
+
+    .center9{
+        justify-content: center;
+    }
+}
+
+/* Для экранов меньше 480px (очень маленькие мобильные устройства) */
+@media (max-width: 480px) {
+    .filtrs, .filtrs1 {
+        font-size: 20px; /* Уменьшаем размер текста для лучшей читаемости */
+    }
+
+    .ramka, .my {
+        width: 100%; /* Поле ввода и выпадающий список занимают всю ширину */
+    }
+
+    .search, .pp {
+        width: 100%; /* Кнопки занимают всю ширину */
+        padding: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .filtrs, .filtrs1 {
+        font-size: 20px; /* Уменьшаем размер текста для лучшей читаемости */
+    }
+
+    .ramka, .my {
+        width: 100%; /* Поле ввода и выпадающий список занимают всю ширину */
+    }
+
+    .search, .pp {
+        width: 100%; /* Кнопки занимают всю ширину */
+        padding: 10px;
+    }
+
+    .pervoe1 {
+        width:100%;
+    }
+
+    
+    .centerrr9{
+        justify-content: center;
+    }
+
+    .center9{
+        justify-content: center;
+    }
 }
 </style>

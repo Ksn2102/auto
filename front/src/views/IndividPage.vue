@@ -1,37 +1,54 @@
 <template>
-        <div class="conteiner19" v-if="car">
-            <p class="zagolovok">{{ car.text }}</p>
-            <div class="flex2">
-                <img class="pic" :src="require(`@/assets/${car.img}`)"/>
-                <div>
-                    <p>Цвет:{{ car.color }}</p>
-                    <p>Габариты:3 x 3 x 4 м</p>
-                    <p>Масса:{{ car.weight }}</p>
-                    <h1>{{ car.price }}</h1>
-                    <p class="photo"><button class="centerr">Договориться о встрече</button></p>
-                </div>
-            </div>
-            <div class="podrobno">
-                <p class="dop">Описание</p>
-                <p>{{ car.opic }}</p>
+    <div class="conteiner19" v-if="car">
+        <p class="zagolovok">{{ car.text }}</p>
+        <div class="flex2">
+            <img class="pic" :src="require(`@/assets/${car.img}`)" />
+            <div>
+                <p>Цвет: {{ car.color }}</p>
+                <p>Габариты: 3 x 3 x 4 м</p>
+                <p>Масса: {{ car.weight }}</p>
+                <h1>{{ car.price }} ₽</h1>
+                <p class="photo">
+                     <button class="centerr" @click="goToBronPage(car)">Забронировать</button>
+                </p>
             </div>
         </div>
+        <div class="podrobno">
+            <p class="dop">Описание</p>
+            <p>{{ car.opic }}</p>
+        </div>
+    </div>
 </template>
+
 <script>
 import cars from '@/mocks/cars.json';
-export default {
-    name: 'IndividPage',
-    data() {
-        return {
-            car: null,
-        }
-    },
-    computed: {
 
-    },
-    mounted() {
-        this.car = cars.find(car => car.id === +this.$route.params.id)
+export default {
+  name: 'IndividPage',
+  data() {
+    return {
+      car: null,
+    };
+  },
+  mounted() {
+    const carId = parseInt(this.$route.params.id);
+    this.car = cars.find(car => car.id === carId);
+  },
+  methods: {
+    goToBronPage() {
+      // Проверяем, авторизован ли пользователь
+      const token = localStorage.getItem('access_token');
+      
+      if (!token) {
+        alert('❌ Для бронирования необходимо войти в систему!');
+        this.$router.push('/login');
+        return;
+      }
+      
+      // Переход на страницу бронирования
+      this.$router.push(`/bron/${this.car.id}`);
     }
+  }
 };
 </script>
 <style>
@@ -41,12 +58,6 @@ a{
     color: inherit;
     text-decoration: none;
 }
-
-/* button{
-    border: none;
-    background-color: #40E0D0;
-    border: 1px solid #244e24;
-} */
 
 .rasstoyanie{
     gap: 95px;
@@ -159,7 +170,7 @@ a{
 }
 
 .ramka{
-    width: 100px;
+    width: 50px;
     border-radius: 20px;
     border: 1px solid #255aba;
 }
@@ -168,7 +179,7 @@ a{
     border-radius: 20px;
     border: 1px solid #255aba;
 }
-/*Товар*/
+
 .flex2{
     display: flex;
     margin-top: 20px;
@@ -196,6 +207,100 @@ a{
 
 .pic{
     width: 300px;
+}
+
+.conteiner19 {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+}
+
+.zagolovok {
+    padding-top: 30px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.flex2 {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    gap: 20px; 
+}
+
+.pic {
+    width: 300px;
+    height: auto;
+}
+
+.flex2 div {
+    flex: 1; 
+    text-align: left; 
+}
+
+.centerr {
+    text-align: center;
+    padding: 5px 30px;
+    margin-top: 15px;
+    background: #7689bc;
+    border: 1px solid;
+    color: black;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.centerr:hover {
+    background-color: #5a6e9c; 
+}
+
+.podrobno {
+    margin-top: 30px;
+}
+
+.dop {
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .flex2 {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .pic {
+        width: 100%; 
+        max-width: 400px; 
+        margin-bottom: 20px; 
+    }
+
+    .flex2 div {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .zagolovok {
+        font-size: 24px; 
+        padding-top: 20px;
+    }
+
+    .pic {
+        max-width: 300px; 
+    }
+
+    .centerr {
+        padding: 10px 20px; 
+        font-size: 14px; 
+    }
+
+    .dop {
+        font-size: 18px; 
+    }
 }
 
 </style>

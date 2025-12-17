@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from services.item_service import ItemService
-from models import db
+from core import db
+from models.item_model import Item
 
 item_bp = Blueprint('item', __name__)
 
@@ -47,3 +48,35 @@ def delete_item(item_id):
         db.session.commit()
         return jsonify({"message": "Item deleted"})
     return jsonify({"error": "Item not found"}), 404
+
+# # Добавить товар
+# @item_bp.route("/items", methods=["POST"])
+# def add_item():
+#     data = request.json
+#     new_item = Item(
+#         name=data["name"],
+#         description=data.get("description", ""),
+#         price=data["price"]
+#     )
+#     db.session.add(new_item)
+#     db.session.commit()
+#     return jsonify(new_item.to_dict()), 201
+
+# Обновить товар
+# @item_bp.route("/items/<int:item_id>", methods=["PUT"])
+# def update_item(item_id):
+#     item = Item.query.get_or_404(item_id)
+#     data = request.json
+#     item.name = data.get("name", item.name)
+#     item.description = data.get("description", item.description)
+#     item.price = data.get("price", item.price)
+#     db.session.commit()
+#     return jsonify(item.to_dict())
+
+# Удалить товар
+# @item_bp.route("/items/<int:item_id>", methods=["DELETE"])
+# def delete_item(item_id):
+#     item = Item.query.get_or_404(item_id)
+#     db.session.delete(item)
+#     db.session.commit()
+#     return jsonify({"message": "Item deleted"}), 200

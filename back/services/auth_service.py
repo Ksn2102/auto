@@ -1,7 +1,8 @@
-from models.user_model import User
+from flask_jwt_extended import create_access_token
+from models.user import User
 from itsdangerous import URLSafeTimedSerializer
 from flask_mail import Message
-from core import mail  # Импортируем mail из core.py
+from core import mail  
 from config import Config
 
 class AuthService:
@@ -12,7 +13,7 @@ class AuthService:
         name = data.get('name')
         patronimyc = data.get('patronimyc')
         surname = data.get('surname')
-        email = email.get('email')
+        email = data.get('email')
 
         if not login or not password or not name or not surname:
             return {"error": "Login, password, first_name and last_name are required"}, 400
@@ -33,14 +34,14 @@ class AuthService:
 
     @staticmethod
     def authenticate_user(data):
-        login = data.get('login')
+        email = data.get('email')
         password = data.get('password')
 
-        user = User.query.filter_by(login=login).first()
+        user = User.query.filter_by(email=email).first()
         if not user or not user.check_password(password):
             return {"error": "Invalid credentials"}, 401
 
-        access_token = create_access_token(identity=user.id)
+        access_token = create_access_token(identity="login")
         return {"access_token": access_token}, 200
     
     @staticmethod
