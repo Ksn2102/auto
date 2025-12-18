@@ -1,0 +1,516 @@
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.rasstoyanie{
+    gap: 95px;
+}
+
+.rego{
+    padding: 10px;
+}
+
+.otstopp{
+    margin-left: 15px;
+    padding: 10px 25px;
+}
+
+.search{
+    padding: 5px 25px;
+}
+
+.pp{
+    padding: 3px 10px;
+    margin: 10px;
+}
+
+.logo{
+    width: 90px;
+}
+
+.zagolovok{
+    padding-top: 30px;
+    font-weight: bolder;
+}
+
+.vmeste{
+    display: flex;
+}
+
+.nal{
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.filtrs{
+    text-align: center;
+    padding-top: 10px;
+}
+
+.filtrs1{
+    text-align: center;
+    padding-top: 50px;
+}
+
+.filtrs2{
+    padding-top: 10px;
+}
+
+.one{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+
+.opic{
+    text-align: center;
+}
+
+.opic1{
+    text-align: center;
+    color: red;
+}
+
+.pervoe{
+    border: thick double rgba(201, 177, 158, 0.222);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.photo{
+    text-align: center;
+}
+
+.pervoe {
+    position: relative;
+    overflow: hidden;
+}
+
+.pervoe img {
+    transition: transform 0.3s ease;
+}
+
+.one1{
+    display: flex;
+    gap: 30px;
+    padding-top: 10px;
+}
+
+.one2{
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+
+
+.conteiner19 {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 60px;
+}
+
+.ramka{
+    width: 50px;
+    border-radius: 20px;
+    border: 1px solid #255aba;
+}
+
+.my{
+    border-radius: 20px;
+    border: 1px solid #255aba;
+}
+
+.flex2{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-evenly;
+}
+
+.dop{
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+}
+
+.podrobno{
+    margin-top: 30px;
+}
+
+.centerr{
+    text-align: center;
+    padding: 5px 30px;
+    margin-top: 15px;
+    background: #7689bc;
+    border: 1px solid;
+    color: black;
+    border-radius: 15px;
+}
+
+.pic{
+    width: 300px;
+}
+
+.conteiner19 {
+    max-width: 1000px;
+    width: 100%;
+    margin: 0 auto;
+    padding-bottom: 60px;
+    box-sizing: border-box;
+}
+
+.zagolovok {
+    padding-top: 30px;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.flex2 {
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-between;
+    gap: 20px; 
+}
+
+.pic {
+    width: 300px;
+    height: auto;
+}
+
+.flex2 div {
+    flex: 1; 
+    text-align: left; 
+}
+
+.centerr {
+    text-align: center;
+    padding: 5px 30px;
+    margin-top: 15px;
+    background: #7689bc;
+    border: 1px solid;
+    color: black;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.centerr:hover {
+    background-color: #5a6e9c; 
+}
+
+.podrobno {
+    margin-top: 30px;
+}
+
+.dop {
+    border-bottom: 1px solid black;
+    font-weight: bolder;
+    padding-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+    .flex2 {
+        flex-direction: column; 
+        align-items: center; 
+    }
+
+    .pic {
+        width: 100%; 
+        max-width: 400px; 
+        margin-bottom: 20px; 
+    }
+
+    .flex2 div {
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .zagolovok {
+        font-size: 24px; 
+        padding-top: 20px;
+    }
+
+    .pic {
+        max-width: 300px; 
+    }
+
+    .centerr {
+        padding: 10px 20px; 
+        font-size: 14px; 
+    }
+
+    .dop {
+        font-size: 18px; 
+    }
+}
+
+label{
+text-align: center;
+}   
+
+.mini{
+    display: flex;
+    gap: 20px;
+}
+
+.second{
+    padding-bottom: 20px;
+    margin-left: 100px;
+}
+
+.flex {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+}
+
+a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.rasstoyanie{
+    gap: 95px;
+}
+
+.rego{
+    padding: 10px;
+}
+
+.otstopp{
+    margin-left: 15px;
+    padding: 10px 25px;
+}
+
+.search{
+    padding: 5px 25px;
+    border: none;
+    background-color: #2947bc78;
+    border-radius: 20px;
+    border: 1px solid #000000;
+}
+
+.pp{
+    padding: 3px 10px;
+    margin: 10px;
+    border: none;
+    background-color: #2947bc78;
+    border-radius: 20px;
+    border: 1px solid #000000;
+}
+
+.logo{
+    width: 90px;
+}
+
+.zagolovok{
+    padding-top: 30px;
+}
+
+.vmeste{
+    display: flex;
+}
+
+.nal{
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+.filtrs{
+    text-align: center;
+    padding-top: 10px;
+    font-size: 25px;
+}
+
+.filtrs1{
+    text-align: center;
+    padding-top: 50px;
+    font-size: 25px;
+}
+
+.filtrs2{
+    padding-top: 10px;
+}
+
+.one{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.opic{
+    text-align: center;
+}
+
+.opic1{
+    text-align: center;
+    color: red;
+}
+
+.pervoe{
+    border: thick double rgba(201, 177, 158, 0.222);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.photo{
+    text-align: center;
+    margin: 5px 0 10px;
+}
+
+.pervoe {
+    position: relative;
+    overflow: hidden;
+}
+
+.pervoe1{
+    border: 2px solid rgb(0, 0, 0);
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 5px;
+    width: calc((100% / 3) - 34px)
+}
+
+@media (max-width: 1024px) {
+    .pervoe1 {
+        width: calc((100% / 2) - 34px)
+    }
+}
+
+.one1{
+    display: flex;
+    gap: 30px;
+    padding-top: 10px;
+    flex-wrap: wrap;
+}
+
+.one2{
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.razmer12{
+    width: 270px;
+    height: 250px;
+}
+
+.conteiner15 {
+    max-width: 1300px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex: auto 1;
+}
+
+.ramka{
+    width: 50px;
+    border-radius: 20px;
+    border: 1px solid #255aba;
+}
+
+.my{
+    border-radius: 20px;
+    border: 1px solid #255aba;
+}
+
+.center9{
+    display: flex;
+}
+
+.centerrr9x{
+    display: flex;
+    padding: 10px;
+}
+/*Товар*/
+.flex2{
+    display: flex;
+    margin-top: 20px;
+    justify-content: space-around;
+}
+
+.dop{
+    border-bottom: 1px solid black;
+}
+
+.podrobno{
+    margin-top: 30px;
+}
+
+.centerr{
+    text-align: center;
+    padding: 5px 30px;
+    margin-top: 15px;
+}
+
+@media (max-width: 768px) {
+    .conteiner15 {
+        flex-direction: column; /* Переводим layout в вертикальную ориентацию */
+        display: block;
+    }
+
+    .first {
+        max-width: 100%; /* Блок фильтров занимает всю ширину */
+        margin-bottom: 20px;
+    }
+
+    .second {
+        max-width: 100%; /* Блок товаров занимает всю ширину */
+    }
+
+    .centerrr9x{
+        justify-content: center;
+    }
+
+    .center9{
+        justify-content: center;
+    }
+}
+
+/* Для экранов меньше 480px (очень маленькие мобильные устройства) */
+@media (max-width: 480px) {
+    .filtrs, .filtrs1 {
+        font-size: 20px; /* Уменьшаем размер текста для лучшей читаемости */
+    }
+
+    .ramka, .my {
+        width: 100%; /* Поле ввода и выпадающий список занимают всю ширину */
+    }
+
+    .search, .pp {
+        width: 100%; /* Кнопки занимают всю ширину */
+        padding: 10px;
+    }
+}
+
+@media (max-width: 320px) {
+    .filtrs, .filtrs1 {
+        font-size: 20px; /* Уменьшаем размер текста для лучшей читаемости */
+    }
+
+    .ramka, .my {
+        width: 100%; /* Поле ввода и выпадающий список занимают всю ширину */
+    }
+
+    .search, .pp {
+        width: 100%; /* Кнопки занимают всю ширину */
+        padding: 10px;
+    }
+
+    .pervoe1 {
+        width:100%;
+    }
+
+    
+    .centerrr9{
+        justify-content: center;
+    }
+
+    .center9{
+        justify-content: center;
+    }
+}

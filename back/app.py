@@ -7,13 +7,11 @@ import datetime
 app = Flask(__name__)
 CORS(app)
 
-# ========== ВРЕМЕННЫЕ БАЗЫ ДАННЫХ ==========
 users_db = []
 bookings_db = []
 user_counter = 1
 booking_counter = 1
 
-# ========== ВАШИ 12 МАШИН ==========
 CARS = [
     {
         "id": 1, "img": "211.jpg", "text": "Машина синяя", 
@@ -89,8 +87,6 @@ CARS = [
     }
 ]
 
-# ========== СОЗДАНИЕ ТЕСТОВОГО ПОЛЬЗОВАТЕЛЯ ПРИ ЗАПУСКЕ ==========
-# Создаем тестового пользователя для проверки
 test_user_password = bcrypt.hashpw("test123".encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
 test_user = {
     "id": 1,
@@ -104,7 +100,6 @@ test_user = {
 users_db.append(test_user)
 user_counter = 2
 
-# Создаем тестовую бронь
 test_booking = {
     "id": 1,
     "user_id": 1,
@@ -122,7 +117,6 @@ test_booking = {
 bookings_db.append(test_booking)
 booking_counter = 2
 
-# ========== ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ==========
 
 def verify_token():
     """Проверка JWT токена с подробной отладкой"""
@@ -158,7 +152,6 @@ def verify_token():
         print(f" Ошибка при проверке токена: {str(e)}")
         return None
 
-# ========== АУТЕНТИФИКАЦИЯ ==========
 
 @app.route('/api/register', methods=['POST'])
 def register():
@@ -166,19 +159,16 @@ def register():
     try:
         data = request.json
         print(f" Регистрация: {data.get('email')}")
-        
-        # Валидация
+
         if not data.get('email') or '@' not in data.get('email', ''):
             return jsonify({"error": "Некорректный email"}), 400
         
         if not data.get('password') or len(data.get('password', '')) < 6:
             return jsonify({"error": "Пароль должен быть не менее 6 символов"}), 400
-        
-        # Проверка существующего пользователя
+
         if any(u['email'] == data['email'] for u in users_db):
             return jsonify({"error": "Email уже зарегистрирован"}), 409
-        
-        # Хеширование пароля
+
         hashed = bcrypt.hashpw(data['password'].encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         
         global user_counter
@@ -194,8 +184,7 @@ def register():
         
         users_db.append(user)
         user_counter += 1
-        
-        # Создание токена
+
         token = jwt.encode(
             {
                 "user_id": user["id"],
@@ -245,8 +234,6 @@ def login():
         ):
             print(f" Неверный пароль для: {data.get('email')}")
             return jsonify({"error": "Неверный email или пароль"}), 401
-        
-        # Создание токена
         token = jwt.encode(
             {
                 "user_id": user["id"],
@@ -306,7 +293,6 @@ def get_profile():
         }
     })
 
-# ========== МАШИНЫ ==========
 
 @app.route('/api/cars', methods=['GET'])
 def get_cars():
@@ -326,7 +312,6 @@ def get_car(car_id):
     print(f" Машина с ID {car_id} не найдена")
     return jsonify({"error": "Машина не найдена"}), 404
 
-# ========== БРОНИРОВАНИЯ ==========
 
 @app.route('/api/bron', methods=['POST'])
 def create_bron():
@@ -334,8 +319,7 @@ def create_bron():
     try:
         data = request.json
         print(f" Создание брони: Машина {data.get('carId')}")
-        
-        #  ТРЕБУЕМ авторизацию
+
         payload = verify_token()
         if not payload:
             print(" Попытка бронирования без авторизации")
@@ -399,7 +383,6 @@ def get_bookings():
         "bookings": user_bookings
     })
 
-# ========== ТАРИФЫ ==========
 
 @app.route('/api/tarifs', methods=['GET'])
 def get_tarifs():
@@ -429,7 +412,6 @@ def get_tarifs():
         }
     ])
 
-# ========== ОТЛАДОЧНЫЕ МАРШРУТЫ (только для разработки) ==========
 
 @app.route('/api/debug/users', methods=['GET'])
 def debug_users():
@@ -472,7 +454,6 @@ def test_auth():
             "message": " Нет валидной авторизации"
         }), 401
 
-# ========== ГЛАВНАЯ СТРАНИЦА ==========
 
 @app.route('/')
 def home():
@@ -510,11 +491,7 @@ def debug_all_bookings():
 @app.route('/api/my-bookings', methods=['GET'])
 def get_my_bookings_simple():
     """Упрощенный маршрут для броней (без проверки токена)"""
-    # Для тестирования возвращаем все брони
     return jsonify(bookings_db)
-
-
-# ========== ЗАПУСК СЕРВЕРА ==========
 
 if __name__ == '__main__':
     print("=" * 60)

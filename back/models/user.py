@@ -1,7 +1,7 @@
 # models/user.py
 import datetime
 import bcrypt
-from extensions import db  # Импортируем db из отдельного файла
+from extensions import db  
 
 class User(db.Model):
     __tablename__ = 'users'

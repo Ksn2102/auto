@@ -15,8 +15,7 @@ class Car(db.Model):
     weight = db.Column(db.String(50))
     availability = db.Column(db.Boolean, default=True)
     created_at = db.Column(db.DateTime, default=db.func.current_timestamp())
-    
-    # Отношения
+
     bookings = db.relationship('Booking', backref='car', lazy=True)
     
     def to_dict(self):

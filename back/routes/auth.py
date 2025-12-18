@@ -2,9 +2,8 @@ from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required, get_jwt_identity
 from models.db import db
 from models.user import User
-import re  # Добавляем импорт re
+import re  
 
-# === ФУНКЦИИ ВАЛИДАЦИИ (вставляем вместо импорта из utils) ===
 def validate_email(email):
     """Проверяет корректность email адреса"""
     if not email or '@' not in email:
@@ -16,26 +15,23 @@ def validate_email(email):
 def validate_password(password):
     """Проверяет что пароль не менее 6 символов"""
     return password and len(password) >= 6
-# === КОНЕЦ ФУНКЦИЙ ВАЛИДАЦИИ ===
+
 
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/register', methods=['POST'])
 def register():
     data = request.get_json()
-    
-    # Валидация (используем наши функции)
+
     if not validate_email(data.get('email')):
         return jsonify({'error': 'Некорректный email'}), 400
     
     if not validate_password(data.get('password')):
         return jsonify({'error': 'Пароль должен быть не менее 6 символов'}), 400
-    
-    # Проверяем, нет ли уже пользователя с таким email
+
     if User.query.filter_by(email=data['email']).first():
         return jsonify({'error': 'Email уже зарегистрирован'}), 409
-    
-    # Создаем пользователя
+
     user = User(
         email=data['email'],
         first_name=data.get('first_name', ''),
@@ -46,8 +42,7 @@ def register():
     
     db.session.add(user)
     db.session.commit()
-    
-    # Создаем токены
+
     access_token = create_access_token(identity=str(user.id))
     refresh_token = create_refresh_token(identity=str(user.id))
     

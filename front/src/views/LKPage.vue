@@ -1,9 +1,6 @@
 <template>
   <div class="lk-simple">
     <h1> МОИ БРОНИРОВАНИЯ</h1>
-
-
-    
     <div v-if="allBookings.length > 0" class="all-bookings">
       <h3> ВСЕ брони в системе:</h3>
       <div v-for="booking in allBookings" :key="booking.id" 
@@ -55,10 +52,8 @@ export default {
   },
   methods: {
     async loadData() {
-      // 1. Получаем токен
       this.token = localStorage.getItem('access_token');
-      
-      // 2. Если есть токен, получаем user_id
+
       if (this.token) {
         try {
           const response = await fetch('http://localhost:5000/api/user/profile', {
@@ -72,11 +67,9 @@ export default {
           console.error('Ошибка загрузки профиля:', error);
         }
       }
-      
-      // 3. Загружаем ВСЕ брони
+
       await this.loadAllBookings();
-      
-      // 4. Фильтруем свои брони
+
       if (this.myUserId) {
         this.myBookings = this.allBookings.filter(b => b.user_id == this.myUserId);
       }
@@ -142,7 +135,7 @@ export default {
         
         if (response.ok) {
           alert(` Тестовая бронь создана! ID: ${result.booking.id}`);
-          await this.loadData(); // Обновляем данные
+          await this.loadData(); 
         } else {
           alert(` Ошибка: ${result.error}`);
         }
@@ -156,75 +149,6 @@ export default {
 </script>
 
 <style scoped>
-.lk-simple {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 20px;
-}
+  @import '@/styles/lk.css';
 
-.controls {
-  display: flex;
-  gap: 10px;
-  margin: 20px 0;
-  flex-wrap: wrap;
-}
-
-.controls button {
-  padding: 10px 15px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.controls button:hover {
-  background: #45a049;
-}
-
-.debug-info {
-  background: #f5f5f5;
-  padding: 15px;
-  border-radius: 8px;
-  margin: 20px 0;
-}
-
-.booking-card {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin: 10px 0;
-  border-radius: 8px;
-}
-
-.my-booking {
-  border-left: 5px solid #4CAF50;
-  background: #f0f9f0;
-}
-
-.other-booking {
-  border-left: 5px solid #ccc;
-  background: #f9f9f9;
-}
-
-.my-label {
-  color: #4CAF50;
-  font-weight: bold;
-  margin-top: 10px;
-}
-
-.my-booking-card {
-  background: #e8f5e9;
-  border: 2px solid #4CAF50;
-  padding: 20px;
-  margin: 15px 0;
-  border-radius: 10px;
-}
-
-.no-bookings {
-  text-align: center;
-  padding: 40px;
-  background: #fff3cd;
-  border-radius: 10px;
-  margin-top: 20px;
-}
 </style>

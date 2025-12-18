@@ -1,16 +1,10 @@
 <template>
   <div class="tarifs-page">
-    <!-- Хедер (используйте свой компонент Header) -->
-    <!-- <Header /> -->
-    
     <main class="main-content">
-      <!-- Заголовок страницы -->
       <section class="hero-section">
         <h1 class="page-title">Тарифы и цены</h1>
         <p class="page-subtitle">Выберите оптимальный тариф для аренды автомобиля</p>
       </section>
-      
-      <!-- Сетка тарифов -->
       <section class="tarifs-grid">
         <div class="tarif-card" v-for="tarif in tarifs" :key="tarif.id">
           <div class="tarif-header">
@@ -40,10 +34,7 @@
           </div>
         </div>
       </section>
-      
-      
-      
-      <!-- Калькулятор стоимости -->
+
       <section class="calculator-section">
         <h2>Рассчитайте стоимость аренды</h2>
         <div class="calculator">
@@ -80,9 +71,6 @@
         </div>
       </section>
     </main>
-    
-    <!-- Футер (используйте свой компонент Footer) -->
-    <!-- <Footer /> -->
   </div>
 </template>
 
@@ -97,7 +85,7 @@ export default {
           name: 'Эконом',
           price: '1 500 ₽',
           period: '/сутки',
-          image: require('@/assets/1.png'), // Замените на свои изображения
+          image: require('@/assets/1.png'), 
           features: [
             'До 200 км в сутки',
             'Эконом-класс автомобилей',
@@ -137,7 +125,7 @@ export default {
     
       ],
       activeFaq: null,
-      calcTarif: 2, // Стандарт по умолчанию
+      calcTarif: 2, 
       calcDays: 3,
       calcCar: 'comfort'
     }
@@ -145,8 +133,7 @@ export default {
   methods: {
     selectTarif(tarif) {
       alert(`Вы выбрали тариф "${tarif.name}"!`);
-      // Можно добавить логику выбора тарифа
-      // Например, сохранение в store или переход к бронированию
+
     },
     toggleFaq(index) {
       this.activeFaq = this.activeFaq === index ? null : index;
@@ -155,8 +142,7 @@ export default {
       const tarif = this.tarifs.find(t => t.id === this.calcTarif);
       const price = parseInt(tarif.price.replace(/\D/g, ''));
       let multiplier = 1;
-      
-      // Множитель в зависимости от класса авто
+
       const carMultipliers = {
         'economy': 1,
         'comfort': 1.2,
@@ -177,369 +163,6 @@ export default {
 </script>
 
 <style scoped>
-.tarifs-page {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
+  @import '@/styles/tarif.css';
 
-.main-content {
-  flex: 1;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-  width: 100%;
-}
-
-/* Герой-секция */
-.hero-section {
-  text-align: center;
-  padding: 40px 20px;
-  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-  border-radius: 15px;
-  margin-bottom: 40px;
-}
-
-.page-title {
-  font-size: 2.5rem;
-  color: #2c3e50;
-  margin-bottom: 10px;
-}
-
-.page-subtitle {
-  font-size: 1.2rem;
-  color: #7f8c8d;
-  max-width: 600px;
-  margin: 0 auto;
-}
-
-/* Сетка тарифов */
-.tarifs-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 30px;
-  margin-bottom: 50px;
-}
-
-.tarif-card {
-  background: white;
-  border-radius: 15px;
-  overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-}
-
-.tarif-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-}
-
-.tarif-header {
-  background: #7689bc;
-  color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-.tarif-name {
-  font-size: 1.5rem;
-  margin: 0 0 10px 0;
-}
-
-.tarif-price {
-  display: flex;
-  align-items: baseline;
-  justify-content: center;
-  gap: 5px;
-}
-
-.price {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-.period {
-  font-size: 1rem;
-  opacity: 0.9;
-}
-
-.tarif-image {
-  height: 180px;
-  overflow: hidden;
-}
-
-.tarif-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-
-.tarif-card:hover .tarif-image img {
-  transform: scale(1.05);
-}
-
-.tarif-features {
-  padding: 20px;
-  flex: 1;
-}
-
-.tarif-features ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.tarif-features li {
-  padding: 8px 0;
-  display: flex;
-  align-items: center;
-  color: #555;
-}
-
-.check-icon {
-  color: #4CAF50;
-  font-weight: bold;
-  margin-right: 10px;
-  font-size: 1.2rem;
-}
-
-.tarif-footer {
-  padding: 20px;
-  border-top: 1px solid #eee;
-}
-
-.select-btn {
-  width: 100%;
-  padding: 15px;
-  background: #7689bc;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.select-btn:hover {
-  background: #5a6e9c;
-}
-
-/* Дополнительная информация */
-.additional-info {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
-  margin-bottom: 50px;
-}
-
-.info-card {
-  background: white;
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
-}
-
-.info-card h3 {
-  color: #2c3e50;
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-}
-
-.included-list {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.included-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.included-item .icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.included-item h4 {
-  margin: 0 0 5px 0;
-  color: #34495e;
-}
-
-.included-item p {
-  margin: 0;
-  color: #7f8c8d;
-  font-size: 0.95rem;
-}
-
-/* FAQ */
-.faq-item {
-  border-bottom: 1px solid #eee;
-  margin-bottom: 15px;
-}
-
-.faq-question {
-  padding: 15px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 500;
-  color: #2c3e50;
-}
-
-.faq-question:hover {
-  color: #7689bc;
-}
-
-.faq-icon {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #7689bc;
-}
-
-.faq-answer {
-  padding: 0 0 15px 0;
-  color: #7f8c8d;
-  line-height: 1.6;
-}
-
-/* Калькулятор */
-.calculator-section {
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  border-radius: 15px;
-  padding: 40px;
-  margin-bottom: 50px;
-}
-
-.calculator-section h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  color: #2c3e50;
-}
-
-.calculator {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-}
-
-.calc-inputs {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-
-.input-group label {
-  font-weight: 500;
-  color: #555;
-}
-
-.input-group select,
-.input-group input {
-  padding: 12px 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 1rem;
-  transition: border-color 0.3s;
-}
-
-.input-group select:focus,
-.input-group input:focus {
-  outline: none;
-  border-color: #7689bc;
-  box-shadow: 0 0 0 2px rgba(118, 137, 188, 0.2);
-}
-
-.calc-result {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.result-card {
-  background: white;
-  border-radius: 15px;
-  padding: 30px;
-  text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 300px;
-}
-
-.result-card h4 {
-  margin-bottom: 20px;
-  color: #555;
-}
-
-.total-price {
-  font-size: 2.5rem;
-  font-weight: bold;
-  color: #7689bc;
-  margin-bottom: 25px;
-}
-
-.book-btn {
-  width: 100%;
-  padding: 15px;
-  background: #4CAF50;
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.book-btn:hover {
-  background: #45a049;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-  .calculator {
-    grid-template-columns: 1fr;
-  }
-  
-  .page-title {
-    font-size: 2rem;
-  }
-  
-  .additional-info {
-    grid-template-columns: 1fr;
-  }
-  
-  .tarifs-grid {
-    grid-template-columns: 1fr;
-    max-width: 400px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  .main-content {
-    padding: 15px;
-  }
-  
-  .hero-section {
-    padding: 30px 15px;
-  }
-  
-  .calculator-section {
-    padding: 25px;
-  }
-}
 </style>

@@ -19,19 +19,16 @@ def get_user_bookings():
 def create_booking():
     user_id = get_jwt_identity()
     data = request.get_json()
-    
-    # Проверка доступности автомобиля
+
     car = Car.query.get_or_404(data['car_id'])
     if not car.availability:
         return jsonify({'error': 'Car is not available'}), 400
-    
-    # Расчет стоимости
+
     start_date = datetime.strptime(data['start_date'], '%Y-%m-%d')
     end_date = datetime.strptime(data['end_date'], '%Y-%m-%d')
     days = (end_date - start_date).days + 1
     total_price = days * float(car.daily_rate)
-    
-    # Создание бронирования
+
     booking = Booking(
         user_id=user_id,
         car_id=data['car_id'],
@@ -45,7 +42,7 @@ def create_booking():
     )
     
     db.session.add(booking)
-    car.availability = False  # Помечаем как занятую
+    car.availability = False  
     db.session.commit()
     
     return jsonify(booking.to_dict()), 201
@@ -70,7 +67,6 @@ def cancel_booking(booking_id):
     if booking.user_id != int(user_id):
         return jsonify({'error': 'Unauthorized'}), 403
     
-    # Освобождаем автомобиль
     car = Car.query.get(booking.car_id)
     if car:
         car.availability = True

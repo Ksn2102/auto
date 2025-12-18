@@ -24,24 +24,6 @@
   </template>
   
   <script>
-//   export default {
-//     name: 'LoginPage',
-//     data() {
-//       return {
-//         email: '',
-//         password: '',
-//       };
-//     },
-//     methods: {
-//       handleLogin() {
-//         console.log('Вход:', {
-//           email: this.email,
-//           password: this.password,
-//         });
-//         alert('Вы успешно вошли!');
-//       },
-//     },
-//   };
 import apiClient from 'axios';
 
 export default {

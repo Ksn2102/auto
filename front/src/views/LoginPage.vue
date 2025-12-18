@@ -77,8 +77,7 @@ export default {
 
       try {
         console.log('Отправка данных для входа...');
-        
-        // 🔧 ИСПРАВЛЕНИЕ: правильный URL и сохранение данных
+
         const response = await apiClient.post('http://localhost:5000/api/login', {
           email: this.email,
           password: this.password,
@@ -87,15 +86,12 @@ export default {
         console.log('Ответ от сервера:', response.data);
         
         if(response.data.access_token) {
-          // ✅ Сохраняем токен
           localStorage.setItem('access_token', response.data.access_token);
-          
-          // ✅ Сохраняем данные пользователя
+
           if (response.data.user) {
             localStorage.setItem('user', JSON.stringify(response.data.user));
           }
-          
-          // ✅ Переходим в личный кабинет
+
           this.$router.push('/lk');
           alert('✅ Вы успешно вошли в систему!');
         }
@@ -105,13 +101,11 @@ export default {
       }
     },
   },
-  // УДАЛИТЕ эти строки (они вне компонента и вызывают ошибку):
-  // localStorage.setItem('access_token', response.data.access_token);
-  // localStorage.setItem('user', JSON.stringify(response.data.user));
 };
 </script>
 
 <style scoped>
+
 .otst {
   margin: 15px 0;
   width: 100%;

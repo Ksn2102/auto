@@ -1,4 +1,3 @@
-# routes/tariffs.py
 from flask import Blueprint, jsonify
 
 tariffs_bp = Blueprint('tariffs', __name__)

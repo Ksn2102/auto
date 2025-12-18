@@ -173,66 +173,6 @@ export default {
   },
 };
 
-// import axios from 'axios';
-
-// export default {
-//     name: 'RegisterPage',
-//     data() {
-//         return {
-//             username: '',
-//             name: '',
-//             surname: '',
-//             patronimyc: '',
-//             login: '',
-//             email: '',
-//             password: '',
-//             password_confirm: ''
-//         };
-//     },
-//     methods: {
-//         async register() {
-//             try {
-//                 const response = await axios.post('/register', {
-//                     username: this.username,
-//                     password: this.password,
-//                 });
-//                 alert(response.data.message);
-//             } catch (error) {
-//                 alert(error.response.data.message);
-//             }
-//         },
-//     },
-// };
-
-
-
-// export default {
-//     name: 'RegisterPage',
-//     data() {
-//         return {
-//             username: '',
-//             name: '',
-//             surname: '',
-//             patronimyc: '',
-//             login: '',
-//             email: '',
-//             password: '',
-//             password_confirm: ''
-//         };
-//     },
-//     methods: {
-//         handleRegister() {
-//             // Здесь можно добавить логику регистрации (например, отправку данных на сервер)
-//             console.log('Регистрация:', {
-//                 username: this.username,
-//                 email: this.email,
-//                 password: this.password,
-//             });
-//             alert('Вы успешно зарегистрировались!');
-//         },
-//     },
-//};
-
 </script>
 
 <style>

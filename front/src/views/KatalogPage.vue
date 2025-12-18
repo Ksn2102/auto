@@ -43,7 +43,6 @@
             <div class="second">
                 <h1 class="filtrs1">Наш ассортимент</h1>
                 <div class="one1">
-                    <!-- <a href="../pages/product.html"> </a>-->
                      <div 
                         class="pervoe1"
                         v-for="car in cars"
@@ -77,7 +76,7 @@ export default {
 };
 </script>
 <style>
-
+@import '@/styles/katalog.css';
 label{
 text-align: center;
 }   
@@ -257,7 +256,7 @@ a{
     display: flex;
     padding: 10px;
 }
-/*Товар*/
+
 .flex2{
     display: flex;
     margin-top: 20px;
@@ -280,17 +279,17 @@ a{
 
 @media (max-width: 768px) {
     .conteiner15 {
-        flex-direction: column; /* Переводим layout в вертикальную ориентацию */
+        flex-direction: column; 
         display: block;
     }
 
     .first {
-        max-width: 100%; /* Блок фильтров занимает всю ширину */
+        max-width: 100%; 
         margin-bottom: 20px;
     }
 
     .second {
-        max-width: 100%; /* Блок товаров занимает всю ширину */
+        max-width: 100%; 
     }
 
     .centerrr9x{
@@ -302,33 +301,32 @@ a{
     }
 }
 
-/* Для экранов меньше 480px (очень маленькие мобильные устройства) */
 @media (max-width: 480px) {
     .filtrs, .filtrs1 {
-        font-size: 20px; /* Уменьшаем размер текста для лучшей читаемости */
+        font-size: 20px; 
     }
 
     .ramka, .my {
-        width: 100%; /* Поле ввода и выпадающий список занимают всю ширину */
+        width: 100%; 
     }
 
     .search, .pp {
-        width: 100%; /* Кнопки занимают всю ширину */
+        width: 100%; 
         padding: 10px;
     }
 }
 
 @media (max-width: 320px) {
     .filtrs, .filtrs1 {
-        font-size: 20px; /* Уменьшаем размер текста для лучшей читаемости */
+        font-size: 20px; 
     }
 
     .ramka, .my {
-        width: 100%; /* Поле ввода и выпадающий список занимают всю ширину */
+        width: 100%;
     }
 
     .search, .pp {
-        width: 100%; /* Кнопки занимают всю ширину */
+        width: 100%;
         padding: 10px;
     }
 
