@@ -3,8 +3,10 @@ from flask_cors import CORS
 import bcrypt
 import jwt
 import datetime
+import os
+from flask import Flask, send_from_directory
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static', static_url_path='')
 CORS(app)
 
 users_db = []
@@ -493,17 +495,28 @@ def get_my_bookings_simple():
     """Упрощенный маршрут для броней (без проверки токена)"""
     return jsonify(bookings_db)
 
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def serve_vue_app(path):
+    if path and os.path.exists(os.path.join(app.static_folder, path)):
+        return send_from_directory(app.static_folder, path)
+    return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
-    print("=" * 60)
-    print(" CAR RENTAL API ЗАПУЩЕН!")
-    print(" Адрес: http://localhost:5000")
-    print(" Фронтенд: http://localhost:8080")
-    print("-" * 60)
-    print(f" Тестовый пользователь: test@example.com / test123")
-    print(f" Пользователей в базе: {len(users_db)}")
-    print(f" Броней в базе: {len(bookings_db)}")
-    print(f" Машин в каталоге: {len(CARS)}")
-    print("=" * 60)
-    print(" Логи запросов будут отображаться ниже:")
-    print("=" * 60)
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
+
+# if __name__ == '__main__':
+#     print("=" * 60)
+#     print(" CAR RENTAL API ЗАПУЩЕН!")
+#     print(" Адрес: http://localhost:5000")
+#     print(" Фронтенд: http://localhost:8080")
+#     print("-" * 60)
+#     print(f" Тестовый пользователь: test@example.com / test123")
+#     print(f" Пользователей в базе: {len(users_db)}")
+#     print(f" Броней в базе: {len(bookings_db)}")
+#     print(f" Машин в каталоге: {len(CARS)}")
+#     print("=" * 60)
+#     print(" Логи запросов будут отображаться ниже:")
+#     print("=" * 60)
+#     app.run(debug=True, port=5000)

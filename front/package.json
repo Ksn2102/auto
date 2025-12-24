@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "predeploy": "npm run build",
+    "deploy": "cp -r dist/* ../back/static/"
   },
   "dependencies": {
     "axios": "^1.7.9",

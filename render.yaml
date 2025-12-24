@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: car-rental-backend
+    env: python
+    buildCommand: |
+      pip install -r back/requirements.txt
+      cd front && npm install && npm run build
+      cp -r dist/* ../back/static/
+    startCommand: cd back && gunicorn app:app
+    envVars:
+      - key: DATABASE_URL
+        value: sqlite:///car_rental.db
+      - key: SECRET_KEY
+        generateValue: true
+      - key: JWT_SECRET_KEY
+        generateValue: true
+    staticPublishPath: back/static
